@@ -58,7 +58,3 @@ INSERT INTO tb_produtos(idproduto,
 
 SELECT * from tb_Cliente;
 SELECT * from tb_produtos;
-
-SELECT USER_NAME();
-
-
