@@ -1,0 +1,111 @@
+```markdown
+# Criação do MongoDB
+
+## Comandos para Criação de Banco de Dados no MongoDB
+
+1. **Criar um novo banco de dados**:
+   ```javascript
+   use MeuBancoDeDados
+   ```
+
+2. **Deletar um banco de dados existente**:
+   ```javascript
+   db.dropDatabase()
+   ```
+
+3. **Listar bancos de dados**:
+   ```javascript
+   show dbs
+   ```
+
+4. **Selecionar banco de dados específico**:
+   ```javascript
+   use Trabalho_de_Banco_de_Dados
+   ```
+
+5. **Listar coleções no banco de dados**:
+   ```javascript
+   show collections
+   ```
+
+## Inserir Vários Documentos
+
+### Inserindo Alunos
+```javascript
+db.Alunos.insertMany([
+    {
+      Nome: 'Carlos Silva',
+      Matricula: 56053303,
+      Periodo: 3,
+      ValorEmAberto: '800.00'
+    },
+    {
+      Nome: 'Ana Paula',
+      Matricula: 56053304,
+      Periodo: 5,
+      ValorEmAberto: '1500.75'
+    },
+    {
+      Nome: 'Pedro Santos',
+      Matricula: 56053305,
+      Periodo: 2,
+      ValorEmAberto: '300.25'
+    },
+    {
+      Nome: 'Fernanda Lima',
+      Matricula: 56053306,
+      Periodo: 1,
+      ValorEmAberto: '950.00'
+    },
+    {
+      Nome: 'Lucas Ferreira',
+      Matricula: 56053307,
+      Periodo: 6,
+      ValorEmAberto: '500.50'
+    }
+]);
+```
+
+## Consultas
+
+1. **Encontrar alunos com valor em aberto maior que 500**:
+   ```javascript
+   db.Alunos.find({ ValorEmAberto: { $gt: 500 } })
+   ```
+
+2. **Encontrar alunos em períodos maiores que 2**:
+   ```javascript
+   db.Alunos.find({ Periodo: { $gt: 2 } })
+   ```
+
+3. **Exibir todos os alunos de forma formatada**:
+   ```javascript
+   db.Alunos.find().pretty()
+   ```
+
+4. **Limitar a exibição a 3 alunos**:
+   ```javascript
+   db.Alunos.find().limit(3)
+   ```
+
+5. **Exibir todos os alunos**:
+   ```javascript
+   db.Alunos.find()
+   ```
+
+## Comando de Agregação
+
+### Agregando Notas
+```javascript
+db.Alunos.aggregate([
+    {
+      $lookup: {
+        from: "Notas",
+        localField: "Matricula",
+        foreignField: "Matricula",
+        as: "Notas"
+      }
+    }
+]);
+```
+```
